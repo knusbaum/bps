@@ -1,0 +1,24 @@
+#!/bin/rc -e
+
+if(test -d /sys/lib/pkg/pkg) {
+	echo /sys/lib/pkg/pkg exists. pkg appears to already be installed.
+	exit already_installed
+}
+
+rfork n
+srv tcp!pkg.9project.net!565 pkg /n/pkg
+
+pkg=`{ls /n/pkg/noarch | grep 'pkg-([a-zA-Z0-9]+)_([0-9]+).pkg'}
+if(~ $pkg '') {
+	echo Failed to install. Could not find pkg in /n/pkg/noarch.
+	exit no_pkg
+}
+
+mkdir -p /sys/lib/pkg/pkg
+@{ cd /sys/lib/pkg/pkg && tar -xvzf $pkg }
+
+. /sys/lib/pkg/pkg/meta
+
+echo Unpacking pkg-$version into /
+cd /
+tar -xvf /sys/lib/pkg/pkg/root.tar

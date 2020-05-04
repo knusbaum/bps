@@ -9,7 +9,7 @@ if(~ $pkgname '') {
 
 if(~ `{ls /n/pkg} '') {
 	echo no repo at /n/pkg. Mounting tcp!9project.net!566. >[1=2]
-	srv tcp!9project.net!566 pkg /n/pkg
+	srv tcp!pkg.9project.net!565 pkg /n/pkg
 }
 
 
