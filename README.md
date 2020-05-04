@@ -26,7 +26,8 @@ Feel free to install manually. All that is required is for the pkg directory in 
 
 Currently pkg does extremely basic tasks like installing and uninstalling packages.
 
-`pkg/find [pkg name]` looks for a package by name in `/n/pkg` suitable for installation on `$objtype` systems and returns
+#### `pkg/find [pkg name]`
+looks for a package by name in `/n/pkg` suitable for installation on `$objtype` systems and returns
 the path to the `.pkg` file if one is found. It looks first in `/n/pkg/$objtype` and then in `/n/pkg/noarch`. To browse
 packages, mount `tcp!pkg.9project.net!565` and look through the directories. There is not yet a tool to assist with that.
 The root of that filesystem contains a directory per architecture. The `noarch` directory contains architecture-independent
@@ -36,12 +37,14 @@ If `/n/pkg` is empty, `pkg/find` will mount `tcp!pkg.9project.net!565` before se
 [9bps](https://github.com/knusbaum/9bps) can be bound/mounted to `/n/pkg` instead.
 
 
-`pkg/install [pkg name]` will `pkg/find` a package, unpack the metadata and `root.tar` into `/sys/lib/pkg/`, and then unpack the
+#### `pkg/install [pkg name]`
+will `pkg/find` a package, unpack the metadata and `root.tar` into `/sys/lib/pkg/`, and then unpack the
 `root.tar` into the current namespace by untarring `root.tar` into `/`. It should be possible to install packages into
 custom locations by mounting or binding directories over the install directories.
 
 
-`pkg/remove [pkg name]` will find a package in `/sys/lib/pkg/` and deletes everything listed in its `manifest` file. It then
+#### `pkg/remove [pkg name]`
+will find a package in `/sys/lib/pkg/` and deletes everything listed in its `manifest` file. It then
 deletes all package metadata and `root.tar` from `/sys/lib/pkg`. One issue with `pkg/remove` is that it makes no attempt to
 delete directories that were created by the package installation.
 
