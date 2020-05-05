@@ -22,7 +22,7 @@ if(~ $pkgfile '') {
 echo Found $pkgfile
 
 mkdir -p $tmpcache/$pkgname
-@{ cd $tmpcache/$pkgname && tar -xvzf $pkgfile }
+@{ cd $tmpcache/$pkgname && tar -xzf $pkgfile }
 
 fn sigexit {
 	rm -r $tmpcache/$pkgname
@@ -67,4 +67,4 @@ dircp $tmpcache/$pkgname $pkgcache/$pkgname
 
 echo Unpacking $pkg-$version into /
 cd /
-tar -xvf $pkgcache/$pkgname/root.tar
+tar -xf $pkgcache/$pkgname/root.tar

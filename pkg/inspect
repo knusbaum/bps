@@ -1,0 +1,32 @@
+#!/bin/rc -e
+
+pkgname=$1
+
+if(~ $pkgname '') {
+	echo Usage: pkginstall [pkgname]
+	exit no_pkgname
+}
+
+tmpcache=/tmp/pkg/
+
+pkgfile=`{pkg/find $pkgname}
+if(! ~ $status '') {
+	echo Failed to find package $pkgname
+	exit no_package
+}
+if(~ $pkgfile '') {
+	exit no_package
+}
+
+echo Found $pkgfile
+
+mkdir -p $tmpcache/$pkgname
+@{ cd $tmpcache/$pkgname && tar -xzf $pkgfile }
+
+fn sigexit {
+	rm -r $tmpcache/$pkgname
+}
+
+cat $tmpcache/$pkgname/meta
+echo Manifest
+cat $tmpcache/$pkgname/manifest | sed 's|^|	|g'
