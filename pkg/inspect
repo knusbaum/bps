@@ -1,5 +1,6 @@
 #!/bin/rc -e
 
+rfork e
 pkgname=$1
 
 if(~ $pkgname '') {

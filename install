@@ -5,7 +5,7 @@ if(test -d /sys/lib/pkg/pkg) {
 	exit already_installed
 }
 
-rfork n
+rfork ne
 if(~ `{ls /n/pkg} '') {
 	echo no repo at /n/pkg. Mounting tcp!9project.net!566. >[1=2]
 	srv tcp!pkg.9project.net!565 pkg /n/pkg
