@@ -6,7 +6,10 @@ if(test -d /sys/lib/pkg/pkg) {
 }
 
 rfork n
-srv tcp!pkg.9project.net!565 pkg /n/pkg
+if(~ `{ls /n/pkg} '') {
+	echo no repo at /n/pkg. Mounting tcp!9project.net!566. >[1=2]
+	srv tcp!pkg.9project.net!565 pkg /n/pkg
+}
 
 pkg=`{ls /n/pkg/noarch | grep 'pkg-([a-zA-Z0-9]+)_([0-9]+).pkg'}
 if(~ $pkg '') {
