@@ -5,11 +5,11 @@ rfork e
 pkgname=$1
 
 if(~ $pkgname '') {
-	echo Usage: pkgremove [pkgname]
+	echo Usage: bps/remove [pkgname]
 	exit no_pkgname
 }
 
-pkgcache=/sys/lib/pkg
+pkgcache=/sys/lib/bps
 
 if(! test -d $pkgcache/$pkgname) {
 	echo No such package $pkgname
@@ -27,4 +27,4 @@ for(f in `$nl{cat $pkgcache/$pkgname/manifest}) {
 
 rm -r $pkgcache/$pkgname
 
-## TODO: pkgremove does not remove directories.
+## TODO: bps/remove does not remove directories.

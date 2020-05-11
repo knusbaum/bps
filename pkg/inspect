@@ -4,13 +4,13 @@ rfork e
 pkgname=$1
 
 if(~ $pkgname '') {
-	echo Usage: pkginstall [pkgname]
+	echo Usage: bps/inspect [pkgname]
 	exit no_pkgname
 }
 
-tmpcache=/tmp/pkg/
+tmpcache=/tmp/bps/
 
-pkgfile=`{pkg/find $pkgname}
+pkgfile=`{bps/find $pkgname}
 if(! ~ $status '') {
 	echo Failed to find package $pkgname
 	exit no_package

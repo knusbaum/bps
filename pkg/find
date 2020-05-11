@@ -5,23 +5,23 @@ rfork e
 pkgname=$1
 
 if(~ $pkgname '') {
-	echo Usage: pkgfind [pkgname]  >[1=2]
+	echo Usage: bps/find [pkgname]  >[1=2]
 	exit no_pkgname
 }
 
-if(~ `{ls /n/pkg} '') {
-	echo no repo at /n/pkg. Mounting tcp!9project.net!566. >[1=2]
-	srv tcp!pkg.9project.net!565 pkg /n/pkg
+if(~ `{ls /n/bps} '') {
+	echo no repo at /n/bps. Mounting tcp!9project.net!566. >[1=2]
+	srv tcp!pkg.9project.net!565 bps /n/bps
 }
 
 
-pkg=`{ls /n/pkg/$objtype | grep $pkgname'-([a-zA-Z0-9.]+)_([0-9]+).pkg'}
+pkg=`{ls /n/bps/$objtype | grep $pkgname'-([a-zA-Z0-9.]+)_([0-9]+).pkg'}
 
 if(~ $pkg '') {
-	pkg=`{ls /n/pkg/noarch | grep $pkgname'-([a-zA-Z0-9.]+)_([0-9]+).pkg'}
+	pkg=`{ls /n/bps/noarch | grep $pkgname'-([a-zA-Z0-9.]+)_([0-9]+).pkg'}
 	if(~ $pkg '') {
 		echo Could not find $pkgname >[1=2]
-		exit no_pkg
+		exit no_package
 	}
 }
 
